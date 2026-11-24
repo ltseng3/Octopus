@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "scenario": {
+    "name": "f0_three_agent_synthetic",
+    "seed": 123,
+    "episodes": 80,
+    "agents": [
+      "a",
+      "b",
+      "c"
+    ],
+    "arrival_interval_ms": 300,
+    "deadline_ms": 250
+  },
+  "world": {
+    "backend": "synthetic",
+    "local_error": 0.1,
+    "edge_error": 0.05,
+    "local_correlation": 0.15,
+    "edge_correlation": 0.1
+  },
+  "policy": {
+    "name": "local_only",
+    "reuse_probability": 0.5
+  },
+  "resources": {
+    "edge_workers": 4,
+    "edge_inference_ms": 30,
+    "local_inference_ms": 20,
+    "network_channels": 1,
+    "network_latency_ms": 5,
+    "network_bandwidth_mbps": 100,
+    "observation_bytes": 1024,
+    "result_bytes": 128,
+    "packet_loss": 0,
+    "model_profiles": {
+      "local_model": {
+        "device": "local",
+        "compute_ms": 20.0,
+        "output_bytes": 2048
+      },
+      "edge_model": {
+        "device": "edge",
+        "compute_ms": 30.0,
+        "output_bytes": 128
+      },
+      "late_fusion": {
+        "device": "edge",
+        "compute_ms": 8,
+        "output_bytes": 128
+      },
+      "f0_decider": {
+        "device": "edge",
+        "compute_ms": 1.0,
+        "output_bytes": 128
+      }
+    },
+    "f0_decision_model_id": "f0_decider"
+  },
+  "energy": {
+    "enabled": true,
+    "calibration": "hypothetical",
+    "calibration_source": "Illustrative E1 profile only; NOT hardware measurements",
+    "measurement_window_ms": null,
+    "device_profiles": {
+      "agent": {
+        "baseline_w": 1.6,
+        "compute_incremental_w": 4.0,
+        "radio": {
+          "mode": "per_bit",
+          "tx_j_per_bit": 1.2e-07,
+          "rx_j_per_bit": 8e-08,
+          "tx_incremental_w": 0,
+          "rx_incremental_w": 0
+        }
+      },
+      "edge": {
+        "baseline_w": 17.0,
+        "compute_incremental_w": 9.0,
+        "radio": {
+          "mode": "per_bit",
+          "tx_j_per_bit": 5e-08,
+          "rx_j_per_bit": 5e-08,
+          "tx_incremental_w": 0,
+          "rx_incremental_w": 0
+        }
+      }
+    },
+    "agent_overrides": {},
+    "model_incremental_w": {
+      "local_model": 4.0,
+      "late_fusion": 12.0,
+      "f0_decider": 9.0
+    }
+  },
+  "fusion_f0": {
+    "error_by_agent": {
+      "a": 0.06,
+      "b": 0.09999999999999999,
+      "c": 0.11
+    },
+    "max_source_error": 0.25,
+    "max_age_ms": 120,
+    "min_score_confidence": 0.9,
+    "min_independent_groups": 2,
+    "min_supporting_groups": 2,
+    "dependence_discount": 1.0,
+    "max_conflict_fraction": 0.4
+  }
+}

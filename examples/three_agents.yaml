@@ -1,0 +1,24 @@
+schema_version: 1
+scenario:
+  name: three_agent_common_cause
+  seed: 19
+  episodes: 2000
+  agents: [drone_a, drone_b, drone_c]
+  arrival_interval_ms: 200
+  deadline_ms: 150
+world:
+  backend: synthetic
+  local_error: 0.12
+  edge_error: 0.08
+  edge_correlation: 0.20
+resources:
+  edge_workers: 2
+  edge_inference_ms: 35
+  local_inference_ms: 25
+  network_latency_ms: 4
+  network_bandwidth_mbps: 40
+  observation_bytes: 2048
+  result_bytes: 256
+policy:
+  name: partial_share
+  max_edge_executions: 2

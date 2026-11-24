@@ -1,0 +1,30 @@
+schema_version: 1
+scenario:
+  name: mobihoc_poster_two_agents
+  seed: 42
+  episodes: 20000
+  agents: [vehicle_a, vehicle_b]
+  arrival_interval_ms: 150
+  deadline_ms: 125
+world:
+  backend: synthetic
+  local_error: 0.10
+  edge_error: 0.06
+  local_correlation: 0.0
+  edge_correlation: 0.0
+resources:
+  edge_workers: 2
+  edge_inference_ms: 30
+  local_inference_ms: 15
+  network_channels: 1
+  network_latency_ms: 3
+  network_bandwidth_mbps: 100
+  observation_bytes: 1024
+  result_bytes: 128
+  packet_loss: 0
+policy:
+  name: randomized_reuse
+  reuse_probability: 0.5
+  assumed_edge_error: 0.06
+  assumed_edge_correlation: 0.0
+  joint_failure_budget: 0.01

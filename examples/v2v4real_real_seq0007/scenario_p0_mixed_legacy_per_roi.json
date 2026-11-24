@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "scenario": {
+    "name": "v2v4real_p0_full_pipeline_example",
+    "seed": 20261118,
+    "agents": [
+      "ego",
+      "agent1"
+    ],
+    "episodes": 442,
+    "arrival_interval_ms": 500,
+    "deadline_ms": 400
+  },
+  "world": {
+    "backend": "trace",
+    "trace_file": "trace.jsonl",
+    "fusion_candidate_key": "edge:ego"
+  },
+  "policy": {
+    "name": "mixed_local_fusion",
+    "reuse_probability": 0.5
+  },
+  "resources": {
+    "edge_workers": 4,
+    "edge_inference_ms": 30,
+    "local_inference_ms": 20,
+    "network_channels": 4,
+    "network_latency_ms": 5,
+    "network_bandwidth_mbps": 100,
+    "observation_bytes": 1024,
+    "result_bytes": 128,
+    "packet_loss": 0,
+    "model_profiles": {
+      "local_model": {
+        "device": "local",
+        "compute_ms": 20.0,
+        "output_bytes": 4096
+      },
+      "edge_model": {
+        "device": "edge",
+        "compute_ms": 30.0,
+        "output_bytes": 128
+      },
+      "late_fusion": {
+        "device": "edge",
+        "compute_ms": 6.0,
+        "output_bytes": 128
+      }
+    }
+  }
+}

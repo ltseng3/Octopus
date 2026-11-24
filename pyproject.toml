@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "octopus-sim"
+version = "0.7.1"
+description = "CPU-first edge-coordinated correlated-inference reliability benchmark"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{name="OCTOPUS-Sim research prototype"}]
+dependencies = []
+
+[project.optional-dependencies]
+yaml = ["PyYAML>=6"]
+plot = ["matplotlib>=3.7"]
+vision_import = ["numpy>=1.23"]
+test = ["pytest>=7"]
+empirical_download = ["requests>=2.28"]
+empirical_plot = ["numpy>=1.23", "pandas>=1.5", "matplotlib>=3.7"]
+
+[project.scripts]
+octopus = "octopus_sim.cli:main"
+octopus-fusion = "octopus_fusion.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["octopus_sim*", "octopus_fusion*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

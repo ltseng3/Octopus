@@ -1,0 +1,22 @@
+schema_version: 1
+scenario:
+  name: three_camera_trace_toy
+  seed: 42
+  episodes: 24 # ignored for trace backend: file determines number of events
+  agents: [camera_a, camera_b, camera_c]
+  arrival_interval_ms: 130
+  deadline_ms: 120
+world:
+  backend: trace
+  trace_file: ../traces/toy_three_agent.jsonl
+resources:
+  edge_workers: 2
+  edge_inference_ms: 22
+  local_inference_ms: 12
+  network_latency_ms: 4
+  network_bandwidth_mbps: 100
+  observation_bytes: 512
+  result_bytes: 64
+policy:
+  name: partial_share
+  max_edge_executions: 2

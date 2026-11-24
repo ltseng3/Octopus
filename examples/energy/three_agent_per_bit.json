@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "scenario": {
+    "name": "e1_three_agent_energy",
+    "seed": 123,
+    "episodes": 80,
+    "agents": [
+      "a",
+      "b",
+      "c"
+    ],
+    "arrival_interval_ms": 500,
+    "deadline_ms": 250
+  },
+  "world": {
+    "backend": "synthetic",
+    "local_error": 0.1,
+    "edge_error": 0.05,
+    "local_correlation": 0.15,
+    "edge_correlation": 0.1
+  },
+  "policy": {
+    "name": "mixed_local_fusion",
+    "reuse_probability": 0.5
+  },
+  "resources": {
+    "edge_workers": 4,
+    "edge_inference_ms": 30,
+    "local_inference_ms": 20,
+    "network_channels": 1,
+    "network_latency_ms": 5,
+    "network_bandwidth_mbps": 100,
+    "observation_bytes": 1024,
+    "result_bytes": 128,
+    "packet_loss": 0,
+    "model_profiles": {
+      "local_model": {
+        "device": "local",
+        "compute_ms": 20.0,
+        "output_bytes": 2048
+      },
+      "edge_model": {
+        "device": "edge",
+        "compute_ms": 30.0,
+        "output_bytes": 128
+      },
+      "late_fusion": {
+        "device": "edge",
+        "compute_ms": 8,
+        "output_bytes": 128
+      }
+    }
+  },
+  "energy": {
+    "enabled": true,
+    "calibration": "hypothetical",
+    "calibration_source": "Illustrative E1 profile only; NOT hardware measurements",
+    "measurement_window_ms": null,
+    "device_profiles": {
+      "agent": {
+        "baseline_w": 1.6,
+        "compute_incremental_w": 4.0,
+        "radio": {
+          "mode": "per_bit",
+          "tx_j_per_bit": 1.2e-07,
+          "rx_j_per_bit": 8e-08,
+          "tx_incremental_w": 0,
+          "rx_incremental_w": 0
+        }
+      },
+      "edge": {
+        "baseline_w": 17.0,
+        "compute_incremental_w": 9.0,
+        "radio": {
+          "mode": "per_bit",
+          "tx_j_per_bit": 5e-08,
+          "rx_j_per_bit": 5e-08,
+          "tx_incremental_w": 0,
+          "rx_incremental_w": 0
+        }
+      }
+    },
+    "agent_overrides": {},
+    "model_incremental_w": {
+      "local_model": 4.0,
+      "late_fusion": 12.0
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "dataset": "CooperScene",
+  "split": "test",
+  "vehicle_ids": ["1", "2", "3"],
+  "roi_protocol": "predeclared_world_xy_grid_v1",
+  "coordinate_frame": "cooperscene_global_xy_m",
+  "prediction_origin": "synthetic_fixture",
+  "physical_detector_runs": {
+    "1": "FAKE_example_run_vehicle_1",
+    "2": "FAKE_example_run_vehicle_2",
+    "3": "FAKE_example_run_vehicle_3"
+  },
+  "assumed_source_error": {"1": 0.06, "2": 0.12, "3": 0.30},
+  "error_estimator_status": "unfitted_assumption",
+  "interval_ms": 150.0,
+  "deadline_ms": 250.0
+}
